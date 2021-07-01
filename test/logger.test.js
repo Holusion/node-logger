@@ -171,7 +171,6 @@ describe("logger", ()=>{
     it("transmit errors from output stream if possible", (done)=>{
       let logger = new Logger({facility:1, stdout, level: 7});
       stdout.on("error", (err)=>{
-        console.log("Error caught");
         try{
           expect(err).to.have.property("message", "something something");
           done();
