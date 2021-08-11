@@ -13,6 +13,10 @@ class LogData extends WritableStream {
     this._buf = Buffer.alloc(0);
     this.isTTY = isTTY;
   }
+  get locked(){ return false};
+  get getWriter(){ return undefined; /*?!*/}
+  abort(){ return Promise.reject(new Error("unimplemented"))}
+
   _write(chunk, encoding, next){
     this._buf = Buffer.concat([
       this._buf,
@@ -44,7 +48,6 @@ describe("logger", ()=>{
     l.error("FOO");
     expect(stdout.contents).to.equal("FOO\n");
   });
-
 
   describe("piped", ()=>{
     let stdout;
